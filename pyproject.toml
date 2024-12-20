@@ -16,6 +16,7 @@ streamlit = "^1.41.1"
 pypdf = "^5.1.0"
 chromadb = "^0.5.23"
 crewai = "^0.86.0"
+duckduckgo-search = "^6.3.7"
 
 
 [build-system]
