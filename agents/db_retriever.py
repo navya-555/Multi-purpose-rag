@@ -1,15 +1,11 @@
-from crewai import Agent,Task,Crew,LLM
-from crewai_tools import SerperDevTool
+from crewai import Agent,Task
+from llm import llm
 from litellm import completion
 from langchain.tools import tool
 from langchain_community.vectorstores import Chroma
 import streamlit as st
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
-llm = LLM(
-    api_key=st.secrets['GOOGLE_API'],
-    model="gemini/gemini-1.5-flash",
-)
 embedder = GoogleGenerativeAIEmbeddings(model="models/embedding-001",
                                           google_api_key=st.secrets['GOOGLE_API'])
 class getinfo:
