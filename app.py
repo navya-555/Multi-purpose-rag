@@ -28,14 +28,13 @@ def main():
         handle_userinput(user_question,'./Database')
 
     with st.sidebar:
-        st.subheader("Your documents")
+        st.subheader("Your documents 📁")
 
         if not os.path.exists('Documents'):
             os.makedirs('Documents')
 
         uploaded_files = os.listdir('Documents')
         if uploaded_files:
-            st.write("Uploaded Files:")
             for file in uploaded_files:
                 st.write(f"- {file}")
         else:
@@ -47,7 +46,7 @@ def main():
                 f.write(pdf_docs.getbuffer())
 
                 
-        if st.button("Upload"):
+        if st.button("📤 Upload"):
             if pdf_docs is not None:
                 with st.spinner("Processing"):
                     data=LoadToDB(embedder,'Documents/','Database/',3300,300)
@@ -61,7 +60,7 @@ def main():
                             persist_directory='./Database'
                             )
                         vector.add_documents(chunk)
-                st.success("File Processed Successfully!!!")
+                st.success("✅ File Processed Successfully!!!")
             else:
                 st.error('No file uploaded !!! ')
 
