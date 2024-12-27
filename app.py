@@ -1,61 +1,23 @@
 import streamlit as st
 import os
-from langchain_community.document_loaders import PyPDFDirectoryLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.chains import create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_core.prompts import ChatPromptTemplate
 from process import LoadToDB
+from crew_handler import execute_crew
 
 embedder = GoogleGenerativeAIEmbeddings(model="models/embedding-001",
-                                          google_api_key="Your API key")
+                                          google_api_key=st.secrets['GOOGLE_API'])
 
-
-
-llm = ChatGoogleGenerativeAI(model='gemini-1.5-pro',temperature=0,max_tokens=None, api_key="Your API key")
-
-system_prompt=(
-    '''You are an assistant for question—answering tasks.
-    Use the following pieces of retrieved context to answer
-    question. If you don't know the answer, say that you
-    don't know.
-    \n\n
-    {context}''' 
-)
-
-prompt=ChatPromptTemplate.from_messages(
-    [
-        ('system', system_prompt),
-        ('human','{input}'),
-    ]
-)
 def handle_userinput(user_question,db):
-    if os.path.isdir(db):
-        vector = Chroma(
-            embedding_function=embedder,
-            persist_directory=db
-        )
-        retriever=vector.as_retriever()
-        qa=create_stuff_documents_chain(llm,prompt)
-        rag_chain=create_retrieval_chain(retriever,qa)
-        response=rag_chain.invoke({'input':user_question})
-        st.write(response['answer'])
-    else:
-        st.error("No Info in DB")
-
-def add_doc(chunk,db):
-    vector = Chroma(
-            embedding_function=embedder,
-            persist_directory=db
-        )
-    vector.add_documents(chunk)
+    with st.spinner('Fetching Information...'):
+        if os.path.isdir(db):
+            response=execute_crew(user_question)
+            st.write(response.raw)
+        else:
+            st.error("No Info in DB")
 
             
 def main():
-
 
     st.set_page_config(page_title="Chat with your PDF",
                        page_icon=":books:")
@@ -80,17 +42,15 @@ def main():
             with st.spinner("Processing"):
                 data=LoadToDB(embedder,'Documents/','Database/',3300,300)
                 data.load()
-                data.chunk()
-                data.database()
-                st.success("File Processed Successfully!!!")
-
-        if st.button('Add'):
-
-            with st.spinner("Processing"):
-                data=LoadToDB(embedder,'Documents/','Database/',3300,300)
-                data.load()
-                add_doc(data.chunk(),'./Database')
-                
+                chunk=data.chunk()
+                if os.path.isdir('./Database'):
+                    data.database()
+                else:
+                    vector = Chroma(
+                        embedding_function=embedder,
+                        persist_directory='./Database'
+                        )
+                    vector.add_documents(chunk)
             st.success("File Processed Successfully!!!")
 
 
