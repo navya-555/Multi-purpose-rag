@@ -12,20 +12,54 @@ def handle_userinput(user_question,db):
     with st.spinner('Fetching Information...'):
         if os.path.isdir(db):
             response=execute_crew(user_question)
-            st.write(response.raw)
+            return response.raw
         else:
-            st.error("No Info in DB")
+            return "No Info in DB"
 
             
 def main():
-
-    st.set_page_config(page_title="Multi-Purpose-Rag",
-                       page_icon=":books:")
-
+    st.set_page_config(page_title="Multi-Purpose-Rag", page_icon=":books:")
     st.header("Chat with your PDF :books:")
-    user_question = st.text_input("Ask a question about your documents:")
-    if user_question:
-        handle_userinput(user_question,'./Database')
+
+    if "messages" not in st.session_state:
+        st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    if prompt := st.chat_input('Enter your query...'):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            message_placeholder = st.empty()
+            response = handle_userinput(prompt, './Database')
+            message_placeholder.markdown(response)
+            st.session_state.messages.append({"role": "assistant", "content": response})
+
+
+
+# if "messages" not in st.session_state:
+#         st.session_state.messages = []
+
+#     for message in st.session_state.messages:
+#         with st.chat_message(message["role"]):
+#             st.markdown(message["content"])
+
+#     if prompt := st.chat_input('Hello, How can I help you ?'):
+#         st.session_state.messages.append({"role": "user", "content": prompt})
+#         with st.chat_message("user"):
+#             st.markdown(prompt)
+
+#         with st.chat_message("assistant"):
+#             message_placeholder = st.empty()
+#             response = handle_userinput(prompt, './Database')
+#             message_placeholder.markdown(response)
+#             st.session_state.messages.append({"role": "assistant", "content": response})
+
+
 
     with st.sidebar:
         st.subheader("Your documents 📁")

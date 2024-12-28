@@ -39,7 +39,9 @@ db_agent = Agent(
     backstory='''This is a RAG application and you will work on retrieving the answer from the vectorstore.
     For this purpose you will use Get Info Tool. You are expert in querying vectorstores for precise and relevant information.
     Frame the answer in a way that is precise and acurate.
-    If you don't find an answer tell what the document is all about.''',
+    If you don't find an answer tell what the document is all about.
+    For very general questions like 'Hi','How are you', etc. you can answer on your own without using the tool.
+    Use the tool only when factual question is asked.''',
     tools=[GetInfoTool()],
     allow_delegation=True,
     verbose=True,
