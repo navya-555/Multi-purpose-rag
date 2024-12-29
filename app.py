@@ -54,25 +54,22 @@ def main():
             st.write("No files uploaded yet.")
 
         pdf_docs = st.file_uploader("Upload your PDFs here")
-        if pdf_docs is not None:
-            with open(os.path.join('Documents', pdf_docs.name), "wb") as f:
-                f.write(pdf_docs.getbuffer())
 
                 
         if st.button("📤 Upload"):
             if pdf_docs is not None:
                 with st.spinner("Processing"):
-                    data=LoadToDB(embedder,'Documents/','Database/',3300,300)
-                    data.load()
+                    data=LoadToDB(embedder,'Database/',3300,300)
+                    data.load_in_memory(pdf_docs)
                     chunk=data.chunk()
-                    if os.path.isdir('./Database'):
+                    if not os.path.isdir('./Database'):
                         data.database()
                     else:
                         vector = Chroma(
                             embedding_function=embedder,
                             persist_directory='./Database'
                             )
-                        vector.add_documents(chunk)
+                        vector.add_texts(chunk)
                 st.success("✅ File Processed Successfully!!!")
             else:
                 st.error('No file uploaded !!! ')
