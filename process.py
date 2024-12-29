@@ -1,7 +1,7 @@
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from io import BytesIO
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 
 
 class LoadToDB:
