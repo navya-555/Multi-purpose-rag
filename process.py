@@ -2,6 +2,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from io import BytesIO
 from pypdf import PdfReader
+import docx2txt
 
 
 class LoadToDB:
@@ -19,11 +20,14 @@ class LoadToDB:
         self. chunk_overlap = chunk_overlap
 
     def load_in_memory(self, file):
-        # Read PDF content from BytesIO
-        pdf_reader = PdfReader(BytesIO(file.read()))
-        self.text = ""
-        for page in pdf_reader.pages:
-            self.text += page.extract_text()
+        if file.name.lower().endswith('.pdf'):
+            # Read PDF content from BytesIO
+            pdf_reader = PdfReader(BytesIO(file.read()))
+            self.text = ""
+            for page in pdf_reader.pages:
+                self.text += page.extract_text()
+        else:
+            self.text=docx2txt.process(BytesIO(file.read()))
         return self.text
 
     def chunk(self):
