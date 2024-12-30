@@ -51,5 +51,5 @@ db_agent = Agent(
 db_task = Task(
     description='Retrieve information from the vectorstore based on {question}.',
     agent=db_agent,
-    expected_output='A well framed answer that is precise and acurate along with the source always.'
+    expected_output='A well framed answer that is precise and acurate and source should always be mentioned.'
 )

@@ -39,26 +39,16 @@ def main():
             message_placeholder.markdown(response)
             st.session_state.messages.append({"role": "assistant", "content": response})
 
-
     with st.sidebar:
-        st.subheader("Your documents 📁")
-
-        if not os.path.exists('Documents'):
-            os.makedirs('Documents')
-
-        uploaded_files = os.listdir('Documents')
-        if uploaded_files:
-            for file in uploaded_files:
-                st.write(f"- {file}")
-        else:
-            st.write("No files uploaded yet.")
 
         pdf_docs = st.file_uploader("Upload your PDFs here")
 
-                
         if st.button("📤 Upload"):
             if pdf_docs is not None:
+                
                 with st.spinner("Processing"):
+                    with open("uploaded_files.txt", "a") as f:
+                        f.write(pdf_docs.name + "\n")
                     data=LoadToDB(embedder,'Database/',3300,300)
                     data.load_in_memory(pdf_docs)
                     chunk=data.chunk()
@@ -71,9 +61,22 @@ def main():
                             )
                         vector.add_texts(chunk)
                 st.success("✅ File Processed Successfully!!!")
+                
             else:
                 st.error('No file uploaded !!! ')
+        
+        uploaded_file_names = []
+        if os.path.exists("uploaded_files.txt"):
+            with open("uploaded_files.txt", "r") as f:
+                uploaded_file_names = [line.strip() for line in f]
 
+        st.subheader("Your documents 📁")
+        if uploaded_file_names:
+            st.write("Uploaded Files:")
+            for file_name in uploaded_file_names:
+                st.write(f"- {file_name}")
+        else:
+            st.write("No files uploaded yet.")
 
 if __name__ == '__main__':
     main()
