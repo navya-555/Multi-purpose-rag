@@ -1,4 +1,4 @@
-from agents.retriever_agent import db_agent,db_task
+from agents.web_agent import db_agent,db_task
 from crewai import Crew
 
 tasks = [db_task]
@@ -10,7 +10,7 @@ crew = Crew(
         verbose=True,
     )
 
-def execute_crew(query):
+def execute_web_crew(query):
     result = crew.kickoff(
         inputs={"question":query}
     )
