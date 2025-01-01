@@ -2,5 +2,6 @@ test.ipynb
 .streamlit
 Database
 db
+video_db
 uploaded_files.txt
 files
