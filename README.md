@@ -31,10 +31,11 @@ This application enables users to retrieve information interactively from divers
 
 
 ## Future Enhancements
-
+*   Add support for additional file types.
 *   Implement more robust error handling and logging.
 *   Add more advanced features, like summarization and specific data extraction.
 *   Explore alternative vector databases and LLM providers.
 
 
-This README provides a high-level overview. For more detailed information, please refer to the individual code files.
+## License
+This project is licensed under the MIT License.
