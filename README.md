@@ -2,8 +2,6 @@
 
 This application enables users to retrieve information interactively from diverse sources such as PDF documents, websites, and YouTube videos using a Retrieval-Augmented Generation (RAG) approach. Powered by advanced language models and vector search, it processes and queries content efficiently, providing precise and context-aware responses.
 
-![Screenshot](https://github.com/user-attachments/assets/32b337e1-1b7b-44b4-a5a8-26b0a37fbc6d)
-![Screenshot-rag-1](https://github.com/user-attachments/assets/374bff63-3748-4bb9-a6b4-4111e7d090a0)
 ![Screenshot](https://github.com/user-attachments/assets/cf091496-63b3-4949-9f42-134dd3220109)
 
 
