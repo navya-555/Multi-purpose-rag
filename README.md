@@ -4,6 +4,8 @@ This application enables users to retrieve information interactively from divers
 
 ![Screenshot-rag-1](https://github.com/user-attachments/assets/374bff63-3748-4bb9-a6b4-4111e7d090a0)
 ![Screenshot](https://github.com/user-attachments/assets/cf091496-63b3-4949-9f42-134dd3220109)
+![Screenshot](https://github.com/user-attachments/assets/32b337e1-1b7b-44b4-a5a8-26b0a37fbc6d)
+
 
 ## Features
 - **Multi-Source Querying**: Interact with uploaded PDF documents, websites, or YouTube video transcripts to extract and understand content.
