@@ -8,32 +8,23 @@ This application enables users to retrieve information interactively from divers
 - **Advanced NLP Integration**: Uses Google's Gemini model and vector embedding for accurate and contextually relevant answers.
 - **Interactive UI**: Built with Streamlit, offering a simple and user-friendly interface for document upload, URL input, and querying.
 
-## Code Structure
+## Usage
+1. Select Data Source: Use the sidebar to choose between "Documents", "Website", or "YouTube Video".
+2. Upload or Input Content: Upload PDFs, enter website URLs, or paste YouTube video links.
+3. Query the System: Type your question into the chat input box and retrieve responses based on the selected source.
+4. Retrieve Results: Processed content is stored in vector databases (Chroma), enabling rapid and relevant querying.
 
-The application consists of several key files:
+## Project Structure
+- `app.py`: Main application script for managing the Streamlit interface and user interactions.
+- `tools.py`: Contains tool classes for querying document and video vector databases.
+- `static.py`: Configures tools for document, website, and video retrieval tasks.
+- `doc_agent.py`: Agent for querying document-based data sources.
+- `video_agent.py`: Agent for querying YouTube video transcripts.
+- `web_agent.py`: Agent for retrieving information from websites.
+- `gemini_llm.py`: Configures the Google Gemini LLM integration.
+- `process_doc.py`: Handles PDF and document processing for database creation.
+- `process_video.py`: Handles YouTube video transcript processing for database creation.
 
-*   *app.py:* The main Streamlit application file. This file handles user input, manages the user interface, and orchestrates the interaction with different data sources.
-*   *agents Directory:* Contains agent-specific logic, including gemini_llm.py which manages the LLM interaction.
-*   *crew Directory:* Contains modules for processing information from various data sources (doc_crew.py, web_crew.py, video_crew.py).
-*   *process_doc.py and process_video.py:* Modules dedicated to processing documents (PDFs) and YouTube video transcripts, respectively.
-*   *tools.py:*  Defines custom tools (GetInfoTool, GetSumTool) for interacting with the ChromaDB databases.
-*   *static.py:* Contains configuration and setup for the different tools.
-
-## Usage Instructions
-
-1.  *Setup:*
-    *   Install required libraries:  pip install -r requirements.txt (You will need to create a requirements.txt file listing the necessary packages).
-    *   Obtain a Google Cloud API key and set it as the environment variable GOOGLE_API_KEY or add it to your secrets.toml file using the streamlit secrets manager.
-    *   Ensure that you have Google Cloud project configured properly.  The embedding model "models/embedding-001" and the language model "gemini/gemini-1.5-flash" need to be accessible to your application.
-
-
-2.  *Run:* Launch the Streamlit application using streamlit run app.py.
-
-3.  *Interaction:*
-    *   Select a source ("Documents," "Website," or "YouTube Video") from the sidebar.
-    *   If choosing "Documents," upload your PDF file.
-    *   For "Website" and "YouTube Video," enter the relevant URL.
-    *   Type your query into the chat box and receive a response.
 
 
 ## Future Enhancements
