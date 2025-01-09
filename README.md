@@ -1,20 +1,12 @@
 # Multi-Purpose RAG Application
 
-This application provides a multi-purpose retrieval augmented generation (RAG) interface built using Streamlit, Langchain, and Google's Generative AI.  It allows users to interact with information from various sources:  documents (PDFs), websites, and YouTube videos.
+This application enables users to retrieve information interactively from diverse sources such as PDF documents, websites, and YouTube videos using a Retrieval-Augmented Generation (RAG) approach. Powered by advanced language models and vector search, it processes and queries content efficiently, providing precise and context-aware responses.
 
 
-## Functionality
-
-The core functionality centers around a chat interface. Users input questions, and the application retrieves and synthesizes relevant information from the chosen source to provide answers.
-
-The application uses Google's Generative AI for embeddings and language modeling.  ChromaDB is used as a vector database to store and efficiently retrieve document embeddings.
-
-The application supports three main data sources:
-
-1.  *Documents:* Users can upload documents (PDF, DOCX, etc.), which are processed and stored in a ChromaDB database.  The application then retrieves relevant information from these documents to answer user queries.
-2.  *Websites:* Users can input a website URL. The application scrapes and processes information from the website to answer user questions.
-3.  *YouTube Videos:* Users provide a YouTube video URL.  The application extracts transcripts from the video, processes them, and makes this information available for querying.
-
+## Features
+- **Multi-Source Querying**: Interact with uploaded PDF documents, websites, or YouTube video transcripts to extract and understand content.
+- **Advanced NLP Integration**: Uses Google's Gemini model and vector embedding for accurate and contextually relevant answers.
+- **Interactive UI**: Built with Streamlit, offering a simple and user-friendly interface for document upload, URL input, and querying.
 
 ## Code Structure
 
