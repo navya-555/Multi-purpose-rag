@@ -22,6 +22,9 @@ This application enables users to retrieve information interactively from divers
 - `video_agent.py`: Agent for querying YouTube video transcripts.
 - `web_agent.py`: Agent for retrieving information from websites.
 - `gemini_llm.py`: Configures the Google Gemini LLM integration.
+- `doc_crew.py`: Crew setup for document-based queries
+- `video_crew.py`: Crew setup for video-based queries
+- `web_crew.py`: Crew setup for website-based queries
 - `process_doc.py`: Handles PDF and document processing for database creation.
 - `process_video.py`: Handles YouTube video transcript processing for database creation.
 
