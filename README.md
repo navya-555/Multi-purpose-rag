@@ -1,6 +1,10 @@
-# Multi-Purpose RAG Application
+![Screenshot-rag-1](https://github.com/user-attachments/assets/374bff63-3748-4bb9-a6b4-4111e7d090a0)# Multi-Purpose RAG Application
 
 This application enables users to retrieve information interactively from diverse sources such as PDF documents, websites, and YouTube videos using a Retrieval-Augmented Generation (RAG) approach. Powered by advanced language models and vector search, it processes and queries content efficiently, providing precise and context-aware responses.
+
+![Screenshot]([Screenshot-rag-1.png])
+![Screenshot](Screenshot(2).png)
+![Screenshot](Screenshot(3).png)
 
 
 ## Features
